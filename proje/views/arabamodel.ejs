@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Document</title>
+    <style>
+        .nav-link
+        {
+            transition: 2px green;
+        }
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark navbar-expand-lg text-white">
+    <div class="container">
+      <a href="index.ejs" class="navbar-brand">NODE.JS</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-node">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">HOME</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/home/index.ejs">Kişiler</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">İLAN</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/ilan/ilan.ejs">iLANLAR</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-4" href="ev.ejs" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">EV</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/ev/ev.ejs">EV</a>
+            <a class="dropdown-item" href="/ev/evtur.ejs">Ev tür</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-4" href="araba.ejs" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">ARABA</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/araba/araba.ejs">Araba</a>
+            <a class="dropdown-item" href="/araba/arabatur.ejs">Araba tür</a>
+            <a class="dropdown-item" href="/araba/arabamodel.ejs">Araba model</a>
+            <a class="dropdown-item" href="/araba/arabamarka.ejs">Araba marka</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-4" href="telefon.ejs" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">TELEFON</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/telefon/telefon.ejs">Telefon</a>
+            <a class="dropdown-item" href="/telefon/telefonmarka.ejs">Telefon marka</a>
+            <a class="dropdown-item" href="/telefon/isletim.ejs">İşletim sistem</a>     
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-4" href="ayakkabi.ejs" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">AYAKKABI</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/ayakkabi/ayakkabi.ejs">Ayakkabı</a>
+            <a class="dropdown-item" href="/ayakkabi/ayakkabifirma.ejs">Ayakkabı marka</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white mx-4" href="kiyafet.ejs" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">KIYAFET</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/kiyafet/kiyafet.ejs">Kıyafet</a>
+            <a class="dropdown-item" href="/kiyafet/kategori.ejs">kategori</a>
+            <a class="dropdown-item" href="/kiyafet/beden.ejs">beden</a>
+
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- body -->
+
+  <div class="container-fluid">
+    <div class="row mt-5 mx-4">
+      <div class="col-md-12">
+       <p class="text-center"><strong>New Transactions</strong><button class="btn btn-success mx-2" id="btnopen" onclick="Open()">NEW</button></p>
+       <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 offset-4">
+              <form  id="frm">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="id giriniz..." id="inputvl">
+                      <button class="btn btn-primary mt-4" id="btnfind" type="submit" style="margin-left: 140px;">FİND</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">İd</th>
+              <th scope="col">Model yıl</th>
+              <th scope="col">Ağırlık</th>
+              <th scope="col">Yolcu sayısı</th>
+              <th scope="col">Transactions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% carmodel.forEach(element => { %>
+              <tr>
+                <th scope="row"><%= element.model_id %> </th>
+                <td><%= element.model_yil %> </td>
+                <td><%= element.agirlik %> </td>
+                <td><%= element.yolcu_sayisi %> </td>
+                <td>  
+                  <form action="/araba/arabamodel/<%= element.model_id %>?_method=DELETE " method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger delete-btn" type="submit">Delete</button>
+                  </form>  
+  <!-- update -->
+                      
+  <button class="btn btn-warning mx-3 my-2 text-center" id="btnopen2" onclick="Open2()">Edit</button>
+  <!-- modal start -->
+  <form action="/araba/arabamodel/<%= element.model_id  %>" method="POST">
+  <div class="modal" tabindex="-1" role="dialog" style="display: none;" id="modal2">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">UPDATE</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="Close2()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <strong class="mx-2">id : </strong>
+            <input type="text" class="form-control my-1" placeholder="id numarası giriniz" name="id2">
+            <div class="row">
+              <div class="col">
+                <strong class="mx-2">Model yıl :</strong>
+                <input type="text" class="form-control my-1" placeholder="modelini giriniz" name="model2">
+              </div>
+              <div class="col">
+                <strong class="mx-2">Ağırlık :</strong>
+                <input type="text" class="form-control my-1" placeholder="ağırlığını giriniz" name="agırlık2">
+              </div>
+              <div class="col">
+                <strong class="mx-2">Yolcu sayısı :</strong>
+                <input type="text" class="form-control my-1" placeholder="yolcu sayısını giriniz" name="yolcusayisi2">
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">GÜNCELLEMELERİ KAYDET</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="Close2()">KAPAT</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal end -->
+</form>            
+  </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>  
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="modal" tabindex="-1" role="dialog" style="display: none;" id="modal1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ADD NEW</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="Close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/araba/arabamodel.ejs" method="post">
+            <div class="form-group">
+              <strong class="mx-2">id : </strong>
+              <input type="text" class="form-control my-1" placeholder="id numarası giriniz" name="id">
+              <div class="row">
+                <div class="col">
+                  <strong class="mx-2">Model yıl :</strong>
+                  <input type="text" class="form-control my-1" placeholder="modelini giriniz" name="model">
+                </div>
+                <div class="col">
+                  <strong class="mx-2">Ağırlık :</strong>
+                  <input type="text" class="form-control my-1" placeholder="ağırlığını giriniz" name="agırlık">
+                </div>
+                <div class="col">
+                  <strong class="mx-2">Yolcu sayısı :</strong>
+                  <input type="text" class="form-control my-1" placeholder="yolcu sayısını giriniz" name="yolcusayisi">
+                </div>
+
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add New</button>
+            <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="Close()">Close</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+const slctbtn = document.querySelector('#btnopen');
+        const slctbtn2 =document.querySelector('#btnopen2');
+        const modalcls = document.querySelector('#modal1');
+        const modalcls2 = document.querySelector('#modal2');
+        function Open()
+        {
+          modalcls.style.display = "block";
+        }
+        function Close()
+        {
+          modalcls.style.display = "none";
+        }
+        function Open2()
+        {
+          modalcls2.style.display = "block";
+        }
+        function Close2()
+        {
+          modalcls2.style.display = "none";
+        }
+        $('#btnfind').on('click',function()
+        {
+          const inputvalue = $("#inputvl").val();
+          const formal = $('#frm');
+          formal.attr('action',`araba/arabamodel/${inputvalue}`);
+        })
+  </script>
+</body>
+</html>
